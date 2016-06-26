@@ -1,27 +1,5 @@
 function [perm_theta] = find_all_perm_theta(t, l0, l1, l2, l4)
 
-%     l(1) = Link([0, 10, 0, pi/2]);
-%     l(2) = Link([0, -2, 0, pi/2]);
-%     l(3) = Link([0, -5, 0, pi/2]);
-%     l(4) = Link([0, 0, 0, pi/2]);
-%     l(5) = Link([0, 10, 0, pi/2]);
-% 
-%     li = SerialLink(l, 'name', '5link');
-%     
-%     kin_angles_test = [0.1486, 1.361, 0.3421, 1.1984, 0.271];
-%     t = li.fkine(kin_angles_test);
-%     l0 = 10;
-%     l1 = 2;
-%     l2 = 5;
-%     l4 = 10;
-
-
-    
-    %We hardcode the permutation sequence
-    %Some of the values are redundant and have been removed
-    %after observation
-    
-    %We start by finding the 2 values of theta0
     [theta0a, theta0b] = find_theta0(t, l1, l4);
     
     %Values of theta1
