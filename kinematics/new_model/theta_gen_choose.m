@@ -11,27 +11,40 @@ l(3) = Link([0, -14.5, 0, pi/2]);
 l(4) = Link([0, 0, 0, pi/2]);
 l(5) = Link([0, 29.5, 0, pi/2]);
 
-%limits of theta to calculate the random values
-t0b = 0.0;
-t0a = -2.6179;
-t1b = 1.5707;
-t1a = 0.0;
-t2b = 1.5707;
-t2a = -1.5707;
-t3b = 0.0;
-t3a = -1.5707;
-t4b = 1.5707;
-t4a = -1.5707;
+%limits of theta to calculate the random values left
+t0bl = 0.0;
+t0al = -2.6179;
+t1bl = 1.5707;
+t1al = 0.0;
+t2bl = 1.5707;
+t2al = -1.5707;
+t3bl = 0.0;
+t3al = -1.5707;
+t4bl = 1.5707;
+t4al = -1.5707;
+
+%limits of theta to calculate the random values right
+t0br = -0.523598
+t0ar = -1.57;
+t1br = 0.0;
+t1ar = -1.5707;
+t2br = pi-1;
+t2ar = 0.0;
+t3br = 0.0;
+t3ar = -1.5707;
+t4br = 1.5707;
+t4ar = -1.5707;
 
 li = SerialLink(l, 'name', '5link');
 
 for i=1:100
     
-    theta0 = (t0b-t0a)*rand + t0a;
-    theta1 = (t1b-t1a)*rand + t1a;
-    theta2 = (t2b-t2a)*rand + t2a;
-    theta3 = (t3b-t3a)*rand + t3a;
-    theta4 = (t4b-t4a)*rand + t4a;
+    theta0 = (t0br-t0ar)*rand + t0ar;
+    theta1 = (t1br-t1ar)*rand + t1ar;
+    theta2 = (t2br-t2ar)*rand + t2ar;
+    
+    theta3 = (t3br-t3ar)*rand + t3ar;
+    theta4 = (t4br-t4ar)*rand + t4ar;
     
     kin_angles_test = [theta0, theta1, theta2, theta3, theta4];
     fkmatp = li.fkine(kin_angles_test);

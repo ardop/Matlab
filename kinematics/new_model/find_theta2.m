@@ -6,6 +6,6 @@ function [ans1, ans2] = find_theta2(t, theta0, theta3)
     co = sqrt(1 - si*si);
     
     ans1 = atan(si/co);
-    ans2 = atan(-si/co);
+    ans2 = atan(si/(-co));
     
 end
