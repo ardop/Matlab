@@ -31,7 +31,8 @@ kin_angles_symbolic = [theta0, theta1, theta2, theta3, theta4];
 % kin_angles_test = [0.1486, 1.361, 0.3421, 1.1984, 0.271];
 % kin_angles_test = [0.227, -0.965,-0.3421, 0.065, -1.176];
 % kin_angles_test = [-0.6863    0.0996    1.1323   -0.1030    1.5217];
-kin_angles_test = [-1.3371    0.5305   1.2567   -0.9907    -1.2214];
+% kin_angles_test = [-1.3371    0.5305   1.2567   -0.9907    -1.2214];
+kin_angles_test = [0.2024    0.7810    2.4231   -1.4759 -0.7462];
 
 
 %fkmat = li.fkine(kin_angles_symbolic)

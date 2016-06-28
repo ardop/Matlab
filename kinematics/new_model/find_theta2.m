@@ -5,7 +5,7 @@ function [ans1, ans2] = find_theta2(t, theta0, theta3)
     si = (ox*sin(theta0) - oy*cos(theta0))/sin(theta3);
     co = sqrt(1 - si*si);
     
-    ans1 = atan(si/co);
-    ans2 = atan(si/(-co));
+    ans1 = atan2(si,co);
+    ans2 = atan2(si,(-co));
     
 end

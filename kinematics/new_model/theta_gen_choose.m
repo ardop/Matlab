@@ -12,23 +12,23 @@ l(4) = Link([0, 0, 0, pi/2]);
 l(5) = Link([0, 29.5, 0, pi/2]);
 
 %limits of theta to calculate the random values left
-t0bl = 0.0;
-t0al = -2.6179;
-t1bl = 1.5707;
-t1al = 0.0;
-t2bl = 1.5707;
-t2al = -1.5707;
+t0bl = 0.0; %30 degrees
+t0al = -(pi-0.523598);
+t1bl = 1.5707 + 0.174532; %10 degrees inwards
+t1al = -0.523598; %30 degrees above shoulder level
+t2bl = pi;
+t2al = 0.0;
 t3bl = 0.0;
 t3al = -1.5707;
 t4bl = 1.5707;
 t4al = -1.5707;
 
 %limits of theta to calculate the random values right
-t0br = -0.523598
-t0ar = -1.57;
-t1br = 0.0;
-t1ar = -1.5707;
-t2br = pi-1;
+t0br = -0.523598;
+t0ar = -pi;
+t1br = 0.523598; %30 degrees above the shoulder
+t1ar = -(1.5707 + 0.174532); %10 degrees inwards
+t2br = pi;
 t2ar = 0.0;
 t3br = 0.0;
 t3ar = -1.5707;
@@ -37,12 +37,17 @@ t4ar = -1.5707;
 
 li = SerialLink(l, 'name', '5link');
 
-for i=1:100
+for i=1:1000
+    
+%     theta0 = (t0bl-t0al)*rand + t0al;
+%     theta1 = (t1bl-t1al)*rand + t1al;
+%     theta2 = (t2bl-t2al)*rand + t2al; 
+%     theta3 = (t3bl-t3al)*rand + t3al;
+%     theta4 = (t4bl-t4al)*rand + t4al;
     
     theta0 = (t0br-t0ar)*rand + t0ar;
     theta1 = (t1br-t1ar)*rand + t1ar;
-    theta2 = (t2br-t2ar)*rand + t2ar;
-    
+    theta2 = (t2br-t2ar)*rand + t2ar;  
     theta3 = (t3br-t3ar)*rand + t3ar;
     theta4 = (t4br-t4ar)*rand + t4ar;
     
@@ -54,7 +59,7 @@ for i=1:100
     fprintf('Angles:\n');
     disp(kin_angles_test);
     fprintf('FK matrix:\n');
-    disp(fkmatp);
+%     disp(fkmatp);
 
     
     p = find_all_perm_theta(fkmatp, l0, l1, l2, l4);
@@ -68,11 +73,18 @@ for i=1:100
         fk = round(fk, 4);
         if isequal(fkmatp, fk)
             disp(j);
-            disp(perm_theta(j, :));
-            disp(fk);
-            fprintf('------------------\n');
+%             disp(perm_theta(j, :));
+%             disp(fk);
+            if round(perm_theta(j, :), 4)==round(kin_angles_test, 4)
+                fprintf('-------------------\n');
+                fprintf('Exact angles and fk matrix:\n');
+                disp(j);
+                fprintf('-------------------\n');
+            end
+
         end
     end
+%     disp(perm_theta);
     
     pause;
     clc;
