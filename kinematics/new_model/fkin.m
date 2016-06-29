@@ -27,7 +27,7 @@ li = SerialLink(l, 'name', '5link');
 
 kin_angles_symbolic = [theta0, theta1, theta2, theta3, theta4];
 
-kin_angles_initial_left = [0, pi/2, pi/2, 0.1, 0];
+kin_angles_initial_left = [0, pi/2, pi/2, 0, 0];
 kin_angles_initial_right = [-pi, -pi/2, pi/2, 0, 0];
 
 %kin_angles_test = [0.925, 1.361, 0.2618, 0.436];
@@ -39,8 +39,8 @@ kin_angles_test = [-2.3341   -0.4417    1.9418   -0.6799    1.4512];
 
 
 % fkmat = li.fkine(kin_angles_symbolic)
-fkmatp = li.fkine(kin_angles_test)
-% fkmatp = li.fkine(kin_angles_initial_left);
+% fkmatp = li.fkine(kin_angles_test)
+fkmatp = li.fkine(kin_angles_initial_right)
 
 
 p = find_all_perm_new_theta(fkmatp, 14.2, 1.8, 14.5, 29.5);

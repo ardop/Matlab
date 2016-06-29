@@ -6,7 +6,7 @@ function [ans1, ans2] = find_new_theta4(t, theta0, theta1)
     den = nx*cos(theta0)*sin(theta1) + ny*sin(theta0)*sin(theta1) - nz*cos(theta1);
     
     ans1 = atan2(num, den);
-    ans2 = ans1 + pi;
+    ans2 = atan2(-num, -den);
 
     
 end
