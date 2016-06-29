@@ -27,28 +27,32 @@ li = SerialLink(l, 'name', '5link');
 
 kin_angles_symbolic = [theta0, theta1, theta2, theta3, theta4];
 
+kin_angles_initial_left = [0, pi/2, pi/2, 0.1, 0];
+kin_angles_initial_right = [-pi, -pi/2, pi/2, 0, 0];
+
 %kin_angles_test = [0.925, 1.361, 0.2618, 0.436];
 % kin_angles_test = [0.1486, 1.361, 0.3421, 1.1984, 0.271];
 % kin_angles_test = [0.227, -0.965,-0.3421, 0.065, -1.176];
 % kin_angles_test = [-0.6863    0.0996    1.1323   -0.1030    1.5217];
 % kin_angles_test = [-1.3371    0.5305   1.2567   -0.9907    -1.2214];
-kin_angles_test = [0.2024    0.7810    2.4231   -1.4759 -0.7462];
+kin_angles_test = [-2.3341   -0.4417    1.9418   -0.6799    1.4512];
 
 
-%fkmat = li.fkine(kin_angles_symbolic)
+% fkmat = li.fkine(kin_angles_symbolic)
 fkmatp = li.fkine(kin_angles_test)
+% fkmatp = li.fkine(kin_angles_initial_left);
 
 
-p = find_all_perm_theta(fkmatp, 14.2, 1.8, 14.5, 29.5);
+p = find_all_perm_new_theta(fkmatp, 14.2, 1.8, 14.5, 29.5);
 perm_theta = [p(:, 1) p(:, 2) p(:, 4) p(:, 3) p(:, 5)];
 
 %rounding off for comparison purposes
-fkmatp = round(fkmatp, 4);
+fkmatp = round(fkmatp, 6);
 
 for i=1:size(perm_theta, 1)
     fk = li.fkine(perm_theta(i, :));
     %rounding off
-    fk = round(fk, 4);
+    fk = round(fk, 6);
 %     disp(fk);
     if isequal(fkmatp, fk)
         disp(i);

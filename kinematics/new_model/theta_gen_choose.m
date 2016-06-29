@@ -39,20 +39,21 @@ li = SerialLink(l, 'name', '5link');
 
 for i=1:1000
     
-%     theta0 = (t0bl-t0al)*rand + t0al;
-%     theta1 = (t1bl-t1al)*rand + t1al;
-%     theta2 = (t2bl-t2al)*rand + t2al; 
-%     theta3 = (t3bl-t3al)*rand + t3al;
-%     theta4 = (t4bl-t4al)*rand + t4al;
+    theta0 = (t0bl-t0al)*rand + t0al;
+    theta1 = (t1bl-t1al)*rand + t1al;
+    theta2 = (t2bl-t2al)*rand + t2al; 
+    theta3 = (t3bl-t3al)*rand + t3al;
+    theta4 = (t4bl-t4al)*rand + t4al;
     
-    theta0 = (t0br-t0ar)*rand + t0ar;
-    theta1 = (t1br-t1ar)*rand + t1ar;
-    theta2 = (t2br-t2ar)*rand + t2ar;  
-    theta3 = (t3br-t3ar)*rand + t3ar;
-    theta4 = (t4br-t4ar)*rand + t4ar;
+%     theta0 = (t0br-t0ar)*rand + t0ar;
+%     theta1 = (t1br-t1ar)*rand + t1ar;
+%     theta2 = (t2br-t2ar)*rand + t2ar;  
+%     theta3 = (t3br-t3ar)*rand + t3ar;
+%     theta4 = (t4br-t4ar)*rand + t4ar;
     
     kin_angles_test = [theta0, theta1, theta2, theta3, theta4];
     fkmatp = li.fkine(kin_angles_test);
+%     fkmatp = fk_manual(kin_angles_test);
     
     
     %Displaying the angles and fk matrix 
@@ -62,7 +63,7 @@ for i=1:1000
 %     disp(fkmatp);
 
     
-    p = find_all_perm_theta(fkmatp, l0, l1, l2, l4);
+    p = find_all_perm_new_theta(fkmatp, l0, l1, l2, l4);
     perm_theta = [p(:, 1) p(:, 2) p(:, 4) p(:, 3) p(:, 5)]; 
     
     fkmatp = round(fkmatp, 4);
