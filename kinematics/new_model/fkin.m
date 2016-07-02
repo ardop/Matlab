@@ -34,17 +34,19 @@ kin_angles_initial_right = [-pi, -pi/2, pi/2, 0, 0];
 % kin_angles_test = [0.1486, 1.361, 0.3421, 1.1984, 0.271];
 % kin_angles_test = [0.227, -0.965,-0.3421, 0.065, -1.176];
 % kin_angles_test = [-0.6863    0.0996    1.1323   -0.1030    1.5217];
-% kin_angles_test = [-1.3371    0.5305   1.2567   -0.9907    -1.2214];
-kin_angles_test = [-2.3341   -0.4417    1.9418   -0.6799    1.4512];
+kin_angles_test = [-0.7853 1.30899 1.5707 -0.78539 0.0];
+% kin_angles_test = [-2.3341   -0.4417    1.9418   -0.6799    1.4512];
 
 
 % fkmat = li.fkine(kin_angles_symbolic)
-% fkmatp = li.fkine(kin_angles_test)
-fkmatp = li.fkine(kin_angles_initial_right)
+fkmatp = li.fkine(kin_angles_test)
+% fkmatp = li.fkine(kin_angles_initial_right)
 
 
 p = find_all_perm_new_theta(fkmatp, 14.2, 1.8, 14.5, 29.5);
-perm_theta = [p(:, 1) p(:, 2) p(:, 4) p(:, 3) p(:, 5)];
+% p = find_all_theta(fkmatp, 14.2, 1.8, 14.5, 29.5)
+
+perm_theta = [p(:, 1) p(:, 2) p(:, 3) p(:, 5) p(:, 4)];
 
 %rounding off for comparison purposes
 fkmatp = round(fkmatp, 6);
