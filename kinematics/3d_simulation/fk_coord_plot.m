@@ -1,9 +1,15 @@
-function [] = fk_coord_plot(theta0, theta1, theta2, theta3, theta4)
+function [] = fk_coord_plot(theta)
 
     l0 = 14.2;
     l1 = 1.8;
     l2 = 14.5;
     l4 = 29.5;
+    
+    theta0 = theta(1);
+    theta1 = theta(2);
+    theta2 = theta(3);
+    theta3 = theta(4);
+    theta4 = theta(5);
     
     %Individual homogenous transformation matrices
     a = [cos(theta0) 0 sin(theta0) 0; sin(theta0) 0 -cos(theta0) 0; 0 1 0 l0; 0 0 0 1];
@@ -12,7 +18,6 @@ function [] = fk_coord_plot(theta0, theta1, theta2, theta3, theta4)
     d = [cos(theta3) 0 sin(theta3) 0; sin(theta3) 0 -cos(theta3) 0; 0 1 0 0; 0 0 0 1];
     e = [cos(theta4) 0 sin(theta4) 0; sin(theta4) 0 -cos(theta4) 0; 0 1 0 l4; 0 0 0 1];
     
-    disp(a*b*c*d*e);
     
     [x0a, y0a, z0a] = map_coord([0, 0, 0]); %Initial Link 0 coordinate
     [x0b, y0b, z0b] = map_coord(get_coord(a));
@@ -25,7 +30,6 @@ function [] = fk_coord_plot(theta0, theta1, theta2, theta3, theta4)
     
     [x4b, y4b, z4b] = map_coord(get_coord(a*b*c*d*e));
     
-    disp([x4b, y4b, z4b]);
     
     %Getting coordinates in required format
     x0 = [x0a x0b];
@@ -64,6 +68,7 @@ function [] = fk_coord_plot(theta0, theta1, theta2, theta3, theta4)
     plot3(x3b, y3b, z3b, '.', 'Color', 'r', 'MarkerSize', 10);
     plot3(x4b, y4b, z4b, '.', 'Color', 'r', 'MarkerSize', 10);
     
+    hold off;
 end
     
     

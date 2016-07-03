@@ -1,5 +1,9 @@
-function [] = initialize_axes(ax)
+function [] = initialize_axes()
 
+    xlabel('x');
+    ylabel('y');
+    zlabel('z');
+    ax = gca;
     ax.XDir = 'reverse';
     ax.XLim = [0 80];
     ax.YDir = 'reverse';   
