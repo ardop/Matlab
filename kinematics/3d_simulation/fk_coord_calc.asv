@@ -1,0 +1,25 @@
+function [] = fk_coord_calc(theta0, theta1, theta2, theta3, theta4)
+
+    l0 = 14.2;
+    l1 = 1.8;
+    l2 = 14.5;
+    l4 = 29.5;
+    
+    %Individual homogenous transformation matrices
+    a = [cos(theta0) 0 sin(theta0) 0; sin(theta0) 0 -cos(theta0) 0; 0 1 0 l0; 0 0 0 1];
+    b = [cos(theta1) 0 sin(theta1) 0; sin(theta1) 0 -cos(theta1) 0; 0 1 0 -l1; 0 0 0 1];
+    c = [cos(theta2) 0 sin(theta2) 0; sin(theta2) 0 -cos(theta2) 0; 0 1 0 -l2; 0 0 0 1];
+    d = [cos(theta3) 0 sin(theta3) 0; sin(theta3) 0 -cos(theta3) 0; 0 1 0 0; 0 0 0 1];
+    e = [cos(theta4) 0 sin(theta4) 0; sin(theta4) 0 -cos(theta4) 0; 0 1 0 l4; 0 0 0 1];
+    
+    [x0a, y0a, z0a] = map_coord(0, 0, 0); %Initial Link 0 coordinate
+    [x0b, y0b, z0b] = map_coord(get_coord(a));
+    
+    [x1b, y1b, z1b] = map_coord(get_coord(a*b));
+    
+    [x2b, y2b, z2b] = map_coord(get_coord(a*b*c));
+    
+    [x3b, y3b, z3b] = map_coord(get_coord(a*b*c*d));
+    
+    [x4b, y4b, z4b]
+    
