@@ -39,6 +39,7 @@ while(true)
             if sum(theta_a - theta_b)<0.001
                 done = true;
             end
+            disp(sum(theta_a-theta_b));
 
         end
         
