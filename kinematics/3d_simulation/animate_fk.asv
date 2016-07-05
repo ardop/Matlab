@@ -2,7 +2,8 @@ clc;
 
 initial_theta = [0, pi/2, pi/2, 0, 0];
 % -1.5707 1.5707 1.5707 0 0
-theta_a = round(initial_theta, 2);
+% -0.756 0.984 0 -1.456 1.23
+theta_a = initial_theta;
 figure;
 fk_coord_plot(initial_theta);
 initialize_axes();
@@ -15,8 +16,8 @@ while(true)
     
     else
         theta_b = str2double(strsplit(in));
-        theta_max = max(theta_b);
         %Animating the rotation
+        theta_b = round(theta_b, 2);
         theta_a = round(theta_a, 2);
         done = false;
         
@@ -25,21 +26,24 @@ while(true)
             for i=1:5
                 if theta_check(i)<0
                     theta_a(i) = theta_a(i) + 0.01;
-                else if theta_check(i)>0
+                elseif theta_check(i)>0
                     theta_a(i) = theta_a(i) - 0.01;
                 end
             end
                 
             %Plotting
             fk_coord_plot(theta_a);
-            disp(theta_a);
-            disp(theta_b);
+            pause(0.01);
+ 
+
             
             %Checking equality
-            if sum(theta_a - theta_b)==0
+            if sum(abs(abs(theta_a) - abs(theta_b)))<0.001
                 done = true;
-                disp('haha\n');
             end
+            
+            disp(abs(abs(theta_a) - abs(theta_b)));
+
         end
         
         theta_a = theta_b;
