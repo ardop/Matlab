@@ -54,6 +54,7 @@ function [] = fk_coord_plot(theta)
     
     %Plotting links
     hold on;
+    cla;
     
     plot3(x0, y0, z0, 'LineWidth', 2, 'Color', 'b');
     plot3(x1, y1, z1, 'LineWidth', 2, 'Color', 'b');
@@ -68,7 +69,8 @@ function [] = fk_coord_plot(theta)
     plot3(x3b, y3b, z3b, '.', 'Color', 'r', 'MarkerSize', 10);
     plot3(x4b, y4b, z4b, '.', 'Color', 'r', 'MarkerSize', 10);
     
-    hold off;
+
+    
 end
     
     
