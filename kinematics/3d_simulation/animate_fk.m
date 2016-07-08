@@ -1,6 +1,6 @@
 clc;
 
-initial_theta = [0, pi/2, pi/2, 0, 0];
+initial_theta = [0 pi/2 pi/2 0 0];
 %sample angles
 % -1.5707 1.5707 1.5707 0 0
 % -0.756 0.984 0 -1.324 1.23
