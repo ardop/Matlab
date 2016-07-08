@@ -5,10 +5,10 @@ function [] = initialize_axes()
     zlabel('z');
     ax = gca;
     ax.XDir = 'reverse';
-    ax.XLim = [0 80];
+    ax.XLim = [0 100];
     ax.YDir = 'reverse';   
-    ax.YLim = [0 60];
-    ax.ZLim = [0 60];
+    ax.YLim = [0 100];
+    ax.ZLim = [0 100];
     grid on;
     rotate3d on;
 %     zoom on;

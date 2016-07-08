@@ -105,8 +105,8 @@ function [] = fk_coord_plot(theta)
     plot3(x4b, y4b, z4b, '.', 'Color', 'r', 'MarkerSize', 10);
     plot3(x5a, y5a, z5a, '.', 'Color', 'r', 'MarkerSize', 10);
     plot3(x5b, y5b, z5b, '.', 'Color', 'r', 'MarkerSize', 10);
-    plot3(x6b, y6b, z6b, '.', 'Color', 'r', 'MarkerSize', 10);
-    plot3(x7b, y7b, z7b, '.', 'Color', 'r', 'MarkerSize', 10);
+    plot3(x6b, y6b, z, '.', 'Color', 'r', 'MarkerSize', 10);
+    plot3(efd(1), efd(2), efd(3), '.', 'Color', 'r', 'MarkerSize', 10);
     
 
     
