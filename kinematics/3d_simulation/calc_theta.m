@@ -33,7 +33,18 @@ function theta = calc_theta(type, angles, coord)
     l2 = 14.5;
     l4 = 29.5;
     
+    theta = [];
+    
     p = find_all_perm_new_theta(t, l0, l1, l2, l4);
+    p = [p(:,1) p(:,2) p(:,3) p(:,5) p(:,4)];
+    
+    for i=1:size(p, 1)
+        fk_mat = find_fk_mat(p(i, :), l0, l1, l2, l4);
+        if round(fk_mat, 4) == round(t, 4)
+            disp(i);
+            disp(p(i, :));
+        end
+    end
     
     
     
