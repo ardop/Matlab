@@ -16,11 +16,15 @@ theta = round(theta, 2);
 yy = sqrt(z*z + y*y);
 
 %alpha1
-[alpha11, alpha12] = find_flat_alpha1(x, l2);
+% [alpha11, alpha12] = find_flat_alpha1(x, l2);
+[alpha11, alpha12] = find_alpha1(x, yy, l2, l4);
 
 %alpha2
 alpha21 = find_alpha2(x, yy, l2, alpha11);
 alpha22 = find_alpha2(x, yy, l2, alpha12);
+
+%alpha3
+alpha3 = atan2(z, y);
 
 
 
