@@ -1,16 +1,16 @@
-% function [fkmatp] = fk_manual(kin_angles_test)
-function [] = fk_manual()
+function [fkmatp] = fk_manual(kin_angles_test)
+% function [] = fk_manual()
 
-%     theta0 = kin_angles_test(1);
-%     theta1 = kin_angles_test(2);
-%     theta2 = kin_angles_test(3);
-%     theta3 = kin_angles_test(4);
-%     theta4 = kin_angles_test(5);
-    syms theta0
-    syms theta1
-    syms theta2
-    syms theta3
-    syms theta4
+    theta0 = kin_angles_test(1);
+    theta1 = kin_angles_test(2);
+    theta2 = kin_angles_test(3);
+    theta3 = kin_angles_test(4);
+    theta4 = kin_angles_test(5);
+%     syms theta0
+%     syms theta1
+%     syms theta2
+%     syms theta3
+%     syms theta4
 
     l0 = 14.2;
     l1 = 1.8;
@@ -24,7 +24,6 @@ function [] = fk_manual()
     e = [cos(theta4) 0 sin(theta4) 0; sin(theta4) 0 -cos(theta4) 0; 0 1 0 l4; 0 0 0 1];
 
     fkmatp = a*b*c*d*e;
-    t = c*d*e
 
 end
 

@@ -38,6 +38,10 @@ t4ar = -1.5707;
 
 li = SerialLink(l, 'name', '5link');
 
+%Storing inputs and target for the neural network model
+y = [];
+x = [];
+
 for i=1:1000
     
     theta0 = (t0bl-t0al)*rand + t0al;
@@ -59,42 +63,31 @@ for i=1:1000
 %     theta4=1.3;
     
     kin_angles_test = [theta0, theta1, theta2, theta3, theta4];
+    y = [y; kin_angles_test];
     fkmatp = li.fkine(kin_angles_test);
-%     fkmatp = fk_manual(kin_angles_test);
     
+%     Now we extract the coordinates from the forward kinematics matrix
+    p = extract_coord(fkmatp);
+    x = [x; p'];
     
-    %Displaying the angles and fk matrix 
-    fprintf('Angles:\n');
-    disp(kin_angles_test);
-    fprintf('FK matrix:\n');
-%     disp(fkmatp);
-
-    
-    p = find_all_perm_new_theta(fkmatp, l0, l1, l2, l4);
-    perm_theta = [p(:, 1) p(:, 2) p(:, 3) p(:, 5) p(:, 4)]; 
-    
-    fkmatp = round(fkmatp, 4);
-
-    for j=1:size(perm_theta, 1)
-        
-        fk = li.fkine(perm_theta(j, :));
-        fk = round(fk, 4);
-        if isequal(fkmatp, fk)
-            disp(j);
-%             disp(perm_theta(j, :));
-%             disp(fk);
-            if round(perm_theta(j, :), 4)==round(kin_angles_test, 4)
-                fprintf('-------------------\n');
-                fprintf('Exact angles and fk matrix:\n');
-                disp(j);
-                fprintf('-------------------\n');
-            end
-
-        end
-    end
-%     disp(perm_theta);
-    
-    pause;
-    clc;
     
 end
+    
+save('x.mat', 'x');
+save('y.mat', 'y');   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
