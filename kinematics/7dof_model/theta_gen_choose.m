@@ -63,7 +63,7 @@ for i=1:1000
     py_c = (pyb-pya)*rand + pya;
     pz_c = (pzb-pza)*rand + pza;
     
-    px_c = -20;
+    px_c = -30;
     
     
     %Instead of choosing the theta values, we choose the final
@@ -90,21 +90,34 @@ for i=1:1000
 %     fprintf('FK matrix:\n');
 %     disp(fkmatp);
   
-    theta2 = 1.5707;
     fkmat(1, 4) = px_c;
     fkmat(2, 4) = py_c;
     fkmat(3, 4) = pz_c;
     
-    p = perm_theta(fkmat, d, theta2);
+    [tt1, tt2, tt3, tt4] = find_theta(fkmat, d);
+    if(tt2=='a')
+        disp('no solution');
+        continue;
+    end
+    
+%     disp(tt2*180/pi);
+
+    p = perm_theta(fkmat, d);
     m = size(p, 1);
-    p = [p(:, 1) p(:, 2) p(:, 4) p(:, 3) zeros(m, 1) zeros(m, 1) zeros(m, 1)]; 
+    p = [p(:, 1) p(:, 2) p(:, 4) p(:, 3)]; 
+    v = validate_theta(p, 10*pi/180, 0, 0);
+    m = size(v, 1);
+    v = [v zeros(m, 1) zeros(m, 1) zeros(m, 1)];
+    
+    
+    
     
     fkmat = round(fkmat, 4);
     
 
-    for j=1:size(p, 1)
+    for j=1:size(v, 1)
         
-        fk = li.fkine(p(j, :));
+        fk = li.fkine(v(j, :));
         fk = round(fk, 4);
         ppa = [px_c; py_c; pz_c];
         ppb = fk(1:3, end);

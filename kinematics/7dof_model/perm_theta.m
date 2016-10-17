@@ -1,6 +1,6 @@
-function [p] = perm_theta(t, d, theta2)
+function [p] = perm_theta(t, d)
 
-    [t1, t3, t4] = find_theta(t, d, theta2);
+    [t1, theta2, t3, t4] = find_theta(t, d);
     p = [t1(1) theta2 t4(1, 1) t3(1, 1);
          t1(1) theta2 t4(1, 1) t3(1, 2);
          t1(1) theta2 t4(1, 2) t3(1, 3);
