@@ -86,7 +86,12 @@ for i=1:100
 %     disp('Valid:');
 %     disp(validate_theta(tt));
 
-    calc_pseudo_inverse(theta_default, t);
+    tt = calc_pseudo_inverse(theta_default, t);
+    
+    fprintf('Angles:\n');
+    disp(theta(1:4));
+    disp('Calculated angles');
+    disp(tt');
     
 
 
