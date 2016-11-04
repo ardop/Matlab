@@ -76,21 +76,20 @@ for i=1:100
 %      disp(t);
 %     t = [px_c, py_c, pz_c]';
     
-    tt = calc_ccd(theta_default, t);
+%     tt = calc_ccd(theta_default, t);
     
-    fprintf('Angles:\n');
-    disp(theta(1:4));
-    disp('Calculated angles');
-    disp(tt(1:4));
-    
-    disp('Valid:');
-    disp(validate_theta(tt));
+%     fprintf('Angles:\n');
+%     disp(theta(1:4));
+%     disp('Calculated angles');
+%     disp(tt(1:4));
+%     
+%     disp('Valid:');
+%     disp(validate_theta(tt));
+
+    calc_pseudo_inverse(theta_default, t);
     
 
-%     fprintf('FK matrix:\n');
-%     disp(fkmatp);
 
-    %Starting Cyclic Coordinate Descent routine
     
     pause;
     clc;
