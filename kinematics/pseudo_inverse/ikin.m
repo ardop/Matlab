@@ -97,7 +97,7 @@ for i=1:100
     disp(tt');
     
     if validate_theta(tt)
-        fprintf('VALID!');
+        fprintf('VALID!\n');
     end
 
     
