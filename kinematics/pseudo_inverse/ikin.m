@@ -68,9 +68,12 @@ for i=1:100
     theta = [theta1, theta2, theta3, theta4, theta5, theta6, theta7];
     
     theta_default = [0, pi/2, pi/2, 0];
-     
+    
+    theta_default = [-(pi-0.523598) -0.523598 0.0 -1.5707];
+ 
     fkmat = li.fkine(theta);
     t = get_coord(fkmat);
+
     
 %      fprintf('Target:\n');
 %      disp(t);
@@ -93,7 +96,9 @@ for i=1:100
     disp('Calculated angles');
     disp(tt');
     
-
+    if validate_theta(tt)
+        fprintf('VALID!');
+    end
 
     
     pause;
