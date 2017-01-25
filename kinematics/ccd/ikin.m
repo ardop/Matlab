@@ -75,6 +75,7 @@ for i=1:100
 %      fprintf('Target:\n');
 %      disp(t);
 %     t = [px_c, py_c, pz_c]';
+    t = [10 10 10]';
     
     tt = calc_ccd(theta_default, t);
     

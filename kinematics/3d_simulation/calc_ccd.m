@@ -50,9 +50,8 @@ for ii = 1:100
 
 
     fk = a*b*c*d*e;
-    disp(fk);
     e_pos = get_coord(fk);
-    err = dst(e_pos, t);
+    err = dst(e_pos', t);
     if(err<0.1)
 %         disp('djhfjd');
         break
@@ -88,7 +87,7 @@ for ii = 1:100
         j_pos = get_coord(fk);
         
         aa = (e_pos - j_pos)/norm(e_pos - j_pos);
-        bb = (t - j_pos)/norm(t - j_pos);
+        bb = (t - j_pos')/norm(t - j_pos');
         
         theta_change = acos(dot(aa, bb));
         dir = cross(aa, bb);
@@ -114,7 +113,7 @@ for ii = 1:100
         e = [cos(theta5) 0 sin(theta5) 0; sin(theta5) 0 -cos(theta5) 0; 0 1 0 l5; 0 0 0 1];
         
         e_pos = get_coord(a*b*c*d*e);
-        erra = dst(e_pos, t);
+        erra = dst(e_pos', t);
         
         theta1 = theta_tmpb(1);
         theta2 = theta_tmpb(2);
@@ -129,7 +128,7 @@ for ii = 1:100
         e = [cos(theta5) 0 sin(theta5) 0; sin(theta5) 0 -cos(theta5) 0; 0 1 0 l5; 0 0 0 1];
         
         e_pos = get_coord(a*b*c*d*e);
-        errb = dst(e_pos, t);
+        errb = dst(e_pos', t);
         
         %Direction ends -------------------------------
         

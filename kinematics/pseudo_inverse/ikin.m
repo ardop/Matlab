@@ -85,6 +85,7 @@ for i=1:100
 %     
 %     disp('Valid:');
 %     disp(validate_theta(tt));
+t = [-30 10 25]';
 
     tt = calc_pseudo_inverse(theta_default, t);
     
