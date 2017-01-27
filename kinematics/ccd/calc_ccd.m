@@ -91,7 +91,6 @@ for ii = 1:100
         bb = (t - j_pos)/norm(t - j_pos);
         
         theta_change = acos(dot(aa, bb));
-        dir = cross(aa, bb);
         
         %For direction ---------------------------------------
         
@@ -182,10 +181,10 @@ end
 
 % disp('Final angles');
 % disp(theta(1:4));
-% disp('Target');
-% disp(t);
-% disp('Calulated');
-% disp(e_pos);
+disp('Target');
+disp(t);
+disp('Calulated');
+disp(e_pos);
             
             
 

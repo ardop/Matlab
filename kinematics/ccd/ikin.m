@@ -67,20 +67,21 @@ for i=1:100
     
     theta = [theta1, theta2, theta3, theta4, theta5, theta6, theta7];
     
-    theta_default = [0, pi/2, pi/2, 0];
+%     theta_default = [0, pi/2, pi/2, 0];
+    theta_default = [t1al, t2al, t3al, t4al];
      
     fkmat = li.fkine(theta);
     t = get_coord(fkmat);
     
 %      fprintf('Target:\n');
 %      disp(t);
-%     t = [px_c, py_c, pz_c]';
-    t = [10 10 10]';
+    t = [px_c, py_c, pz_c]';
+%     t = [10 10 10]';
     
     tt = calc_ccd(theta_default, t);
     
-    fprintf('Angles:\n');
-    disp(theta(1:4));
+%     fprintf('Angles:\n');
+%     disp(theta(1:4));
     disp('Calculated angles');
     disp(tt(1:4));
     
