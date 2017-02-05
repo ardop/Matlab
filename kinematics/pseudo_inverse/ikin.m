@@ -50,13 +50,15 @@ li = SerialLink(l, 'name', '7link');
 
 for i=1:100
     
-    theta1 = (t1bl-t1al)*rand + t1al;
-    theta2 = (t2bl-t2al)*rand + t2al;
-    theta3 = (t3bl-t3al)*rand + t3al; 
-    theta4 = (t4bl-t4al)*rand + t4al;
-    theta5 = (t5bl-t5al)*rand + t5al;
-    theta6 = 0;
-    theta7 = 0;
+    fprintf('Iteration %d\n\n', i);
+    
+%     theta1 = (t1bl-t1al)*rand + t1al;
+%     theta2 = (t2bl-t2al)*rand + t2al;
+%     theta3 = (t3bl-t3al)*rand + t3al; 
+%     theta4 = (t4bl-t4al)*rand + t4al;
+%     theta5 = (t5bl-t5al)*rand + t5al;
+%     theta6 = 0;
+%     theta7 = 0;
     
     %p_chosen
     px_c = (pxb-pxa)*rand + pxa;
@@ -65,44 +67,50 @@ for i=1:100
     
 %     px_c = -30;
     
-    
-    theta = [theta1, theta2, theta3, theta4, theta5, theta6, theta7];
-    
-    theta_default = [0, pi/2, pi/2, 0];
-    
-    theta_default = [t1al, t2al, t3al, t4al];
- 
-    fkmat = li.fkine(theta);
-    t = get_coord(fkmat);
-
-    
-%      fprintf('Target:\n');
-%      disp(t);
-%     t = [px_c, py_c, pz_c]';
-    
-%     tt = calc_ccd(theta_default, t);
-    
-%     fprintf('Angles:\n');
-%     disp(theta(1:4));
-%     disp('Calculated angles');
-%     disp(tt(1:4));
+%     theta = [theta1, theta2, theta3, theta4, theta5, theta6, theta7];  
+%     theta_default = [0, pi/2, pi/2, 0];
 %     
-%     disp('Valid:');
-%     disp(validate_theta(tt));
+%     theta_default = [t1al, t2al, t3al, t4al];
+%  
+%     fkmat = li.fkine(theta);
+%     t = get_coord(fkmat);
+    
+    for j=1:20000
+        
+        fprintf('Trial %d\n\n', j);
+        
+        theta1 = (t1bl-t1al)*rand + t1al;
+        theta2 = (t2bl-t2al)*rand + t2al;
+        theta3 = (t3bl-t3al)*rand + t3al; 
+        theta4 = (t4bl-t4al)*rand + t4al;
+        theta5 = (t5bl-t5al)*rand + t5al;
+        
+        theta_default = [theta1, theta2, theta3, theta4];
+        
+        t = [px_c, py_c, pz_c]';
 
-    tt = calc_pseudo_inverse(theta_default, t);
+        tt = calc_pseudo_inverse(theta_default, t);
     
-    fprintf('Angles:\n');
-    disp(theta(1:4));
-    disp('Calculated angles');
-    disp(tt');
-    
-    if validate_theta(tt)
-        fprintf('VALID!\n');
+%         fprintf('Angles:\n');
+%         disp(theta(1:4));
+%         disp('Calculated angles');
+%         disp(tt');
+
+        if validate_theta(tt)
+            fprintf('Angles:\n');
+            disp(theta(1:4));
+            disp('Calculated angles');
+            disp(tt');
+            fprintf('VALID!\n');
+%             j=20000;
+        
+        else
+            continue
+        end
+        pause;
     end
 
     
-    pause;
     clc;
     
   

@@ -65,28 +65,40 @@ for i=1:100
 %     px_c = -30;
     
     
-    theta = [theta1, theta2, theta3, theta4, theta5, theta6, theta7];
+%     theta = [theta1, theta2, theta3, theta4, theta5, theta6, theta7];
     
 %     theta_default = [0, pi/2, pi/2, 0];
-    theta_default = [t1al, t2al, t3al, t4al];
+%     theta_default = [t1al, t2al, t3al, t4al];
+%     theta_default = [theta1, theta2, theta3, theta4];
      
-    fkmat = li.fkine(theta);
-    t = get_coord(fkmat);
+%     fkmat = li.fkine(theta);
+%     t = get_coord(fkmat);
     
 %      fprintf('Target:\n');
 %      disp(t);
-    t = [px_c, py_c, pz_c]';
+%     t = [px_c, py_c, pz_c]';
 %     t = [10 10 10]';
-    
-    tt = calc_ccd(theta_default, t);
-    
-%     fprintf('Angles:\n');
-%     disp(theta(1:4));
-    disp('Calculated angles');
-    disp(tt(1:4));
-    
-    disp('Valid:');
-    disp(validate_theta(tt));
+
+    for j=1:20
+        
+        theta1 = (t1bl-t1al)*rand + t1al;
+        theta2 = (t2bl-t2al)*rand + t2al;
+        theta3 = (t3bl-t3al)*rand + t3al; 
+        theta4 = (t4bl-t4al)*rand + t4al;
+        theta5 = (t5bl-t5al)*rand + t5al;
+        
+        theta_default = [theta1, theta2, theta3, theta4];
+        t = [px_c, py_c, pz_c]';
+        tt = calc_ccd(theta_default, t);
+        
+        disp('Calculated angles');
+        disp(tt(1:4));
+
+        disp('Valid:');
+        disp(validate_theta(tt));
+        
+        pause
+    end
     
 
 %     fprintf('FK matrix:\n');
@@ -94,7 +106,7 @@ for i=1:100
 
     %Starting Cyclic Coordinate Descent routine
     
-    pause;
+%     pause;
     clc;
     
   

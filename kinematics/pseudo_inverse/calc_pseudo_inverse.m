@@ -49,35 +49,35 @@ for i=1:500
     
     q = q + alpha*pJ*(t - ti);
     
-    if(q(1)<t1al)
-            q(1) = t1al;
-        end
-    if(q(1)>t1bl)
-        q(1) = t1bl;
-    end
-
-    if(q(2)<t2al)
-        q(2) = t2al;
-    end
-    if(q(2)>t2bl)
-        q(2) = t2bl;
-    end
-
-    if(q(3)<t3al)
-        q(3) = t3al;
-    end
-    if(q(3)>t3bl)
-        q(3) = t3bl;
-    end
-
-    if(q(4)<t4al)
-        q(4) = t4al;
-    end
-    if(q(4)>t4bl)
-        q(4) = t4bl;
-    end
+%     if(q(1)<t1al)
+%             q(1) = t1al;
+%         end
+%     if(q(1)>t1bl)
+%         q(1) = t1bl;
+%     end
+% 
+%     if(q(2)<t2al)
+%         q(2) = t2al;
+%     end
+%     if(q(2)>t2bl)
+%         q(2) = t2bl;
+%     end
+% 
+%     if(q(3)<t3al)
+%         q(3) = t3al;
+%     end
+%     if(q(3)>t3bl)
+%         q(3) = t3bl;
+%     end
+% 
+%     if(q(4)<t4al)
+%         q(4) = t4al;
+%     end
+%     if(q(4)>t4bl)
+%         q(4) = t4bl;
+%     end
     
-    disp(q');
+%     disp(q');
     
 end
 
