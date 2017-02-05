@@ -85,7 +85,8 @@ for i=1:100
         theta4 = (t4bl-t4al)*rand + t4al;
         theta5 = (t5bl-t5al)*rand + t5al;
         
-        theta_default = [theta1, theta2, theta3, theta4];
+%         theta_default = [theta1, theta2, theta3, theta4];
+        theta_default = [t1al, t2al, t3al, t4al];
         
         t = [px_c, py_c, pz_c]';
 
@@ -102,7 +103,7 @@ for i=1:100
             disp('Calculated angles');
             disp(tt');
             fprintf('VALID!\n');
-%             j=20000;
+            break
         
         else
             continue
