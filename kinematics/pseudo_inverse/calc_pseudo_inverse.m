@@ -1,6 +1,3 @@
-
-   
-
 function [q] = calc_pseudo_inverse(theta_default, t)
 
 q = theta_default';
