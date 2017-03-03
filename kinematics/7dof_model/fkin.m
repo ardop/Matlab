@@ -38,11 +38,48 @@ theta2 = (t2bl-t2al)*rand + t2al;
 theta3 = (t3bl-t3al)*rand + t3al; 
 theta4 = (t4bl-t4al)*rand + t4al;
 theta5 = (t5bl-t5al)*rand + t5al;
-theta6 = 0;
-theta7 = 0;
+theta6 = (t5bl-t5al)*rand + t5al;
+theta7 = (t5bl-t5al)*rand + t5al;
+
+% theta1 = 0;
+% theta2 = pi/2;
+% theta3 = pi/2;
+% theta4 = 0;
+
 
 theta = [theta1, theta2, theta3, theta4, theta5, theta6, theta7];
 fkmat = li.fkine(theta);
+[t, f, g, h, i] = calc_fk_manual(theta);
+t_analytical = calc_t_analytical(theta);
+f_analytical = calc_f_analytical(theta);
+g_analytical = calc_g_analytical(theta);
+h_analytical = calc_h_analytical(theta);
+i_analytical = calc_i_analytical(theta);
+
+[px, py, pz] = pmap(t);
+a = eq_test(theta, px, py, pz);
+
+
+% disp(i);
+% disp(i_analytical);
+% disp(i - i_analytical);
+
+% disp(h);
+% disp(h_analytical);
+% disp(h - h_analytical);
+
+% disp(g);
+% disp(g_analytical);
+% disp(g - g_analytical);
+
+% disp(f);
+% disp(f_analytical);
+% disp(f - f_analytical);
+
+
+% disp(t);
+% disp(t_analytical);
+% disp(t - t_analytical);
 
 
 
@@ -50,34 +87,7 @@ fkmat = li.fkine(theta);
 
 % fkmatp = li.fkine(kin_angles_initial_right)
 
-[t1] = find_theta(fkmat, d, theta2);
-disp(theta);
+% [t1] = find_theta(fkmat, d, theta2);
+% disp(theta);
 
 
-
-% p = find_all_perm_new_theta(fkmatp, 14.2, 1.8, 14.5, 29.5);
-% % p = find_all_theta(fkmatp, 14.2, 1.8, 14.5, 29.5)
-% 
-% perm_theta = [p(:, 1) p(:, 2) p(:, 3) p(:, 5) p(:, 4)];
-% 
-% %rounding off for comparison purposes
-% fkmatp = round(fkmatp, 6);
-% 
-% for i=1:size(perm_theta, 1)
-%     fk = li.fkine(perm_theta(i, :));
-%     %rounding off
-%     fk = round(fk, 6);
-% %     disp(fk);
-%     if isequal(fkmatp, fk)
-%         disp(i);
-%         disp(perm_theta(i, :));
-%         disp(fk);
-%         fprintf('------------------\n');
-%     end
-% end
-% 
-% %We check if the theta angles are valid
-% epsilon0 = 0.5235; %30 degrees
-% epsilon1 = 0.1745; %10 degrees
-% alpha1 = 0.5235; %30 degrees
-% % valid_theta = validate_theta(perm_theta, epsilon0, epsilon1, alpha1);
