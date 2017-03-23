@@ -10,7 +10,7 @@ function [a] = eq_test(theta, px, py, pz)
     a = 0;
     
     a = -l2*sin(theta2)*sin(theta3) - l2*cos(theta3);
-    disp(a);
+
     
 
     

@@ -57,7 +57,19 @@ h_analytical = calc_h_analytical(theta);
 i_analytical = calc_i_analytical(theta);
 
 [px, py, pz] = pmap(t);
-a = eq_test(theta, px, py, pz);
+% a = eq_test(theta, px, py, pz);
+
+a = 0;
+b = 0;
+
+k1 = (f(3, 4) + l2)/l5;
+k2 = f(2, 4)^2 - l3^2 - l5^2;
+
+a = cos(theta4);
+b = (px^2 + py^2 + l2^2 + 2*l2*px*sin(theta1) - 2*l2*py*cos(theta1) + k2)/(2*l3*l5);
+
+disp(a);
+disp(b);
 
 
 % disp(i);
