@@ -1,6 +1,6 @@
 function [theta_a] = move_to_target(target, theta_a)
 
-    theta_b = ik_pseudo_inverse(target');
+    theta_b = ik_pseudo_inverse_initial(target', theta_a);
     theta_b = theta_b';
 
     if theta_b~=-1

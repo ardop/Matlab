@@ -29,14 +29,6 @@ function [theta_ret] = ik_pseudo_inverse_initial(target, theta_initial)
     iter = 1;
     
     while(true)
-    
-        theta1 = (t1bl-t1al)*rand + t1al;
-        theta2 = (t2bl-t2al)*rand + t2al;
-        theta3 = (t3bl-t3al)*rand + t3al; 
-        theta4 = (t4bl-t4al)*rand + t4al;
-        theta5 = (t5bl-t5al)*rand + t5al;
-
-        theta_default = [theta1, theta2, theta3, theta4];
         
         theta_default = theta_initial;
 
