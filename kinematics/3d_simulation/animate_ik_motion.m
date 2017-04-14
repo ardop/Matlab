@@ -25,22 +25,32 @@ while(true)
         target1 = target(1:3);
         mode = target(4);
         
+        theta_b = ik_pseudo_inverse(target1');
+        theta_b = theta_b'; %Make it a row vector
+        
         % Motion according to the modes
         if(mode==1)
             
-            %Linear motion of joint angles.
-            %First the joint angles for the second coordinate is calculated
-            
-            theta_b = ik_pseudo_inverse(target1');
-            theta_b = theta_b'; %Make it a row vector
-            theta_b = round(theta_b, 2);
-            
+            %Linear uniform motion of joint angles.
+            %First the joint angles for the second coordinate is calculated  
             move_to_theta_uniform(theta_a, theta_b);
             
-           
-     
+  
+        elseif(mode==2)
+            
+            n0 = 1;
+            nf = 100;
+            %Initial and final velocities
+            % Not absolute velocities. Iteration velocities
+            dq0 = 0; 
+            dqf = 0;
+            
+            move_to_theta_cubic(theta_a, theta_b, n0, nf, dq0, dqf);
             
         end
+        
+        %To make the motion continuous
+        theta_a = theta_b;
         
 %         % Now we move from target 1 to target 2 in straight lines
 %         

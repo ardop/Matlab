@@ -1,17 +1,21 @@
-function [] = move_to_theta(theta_a, theta_b)
+function [] = move_to_theta_cubic(theta_a, theta_b)
     
-    done = false
+    done = false;  
+    
     while ~done
             theta_check = theta_a - theta_b;
             %Rounding off to avoid errors
             theta_a = round(theta_a, 2);
             theta_b = round(theta_b, 2);
+            flag = 0;
             for i=1:5
                 %Updating angle at every time instance
                 if theta_check(i)<0
                     theta_a(i) = theta_a(i) + 0.01;
                 elseif theta_check(i)>0
                     theta_a(i) = theta_a(i) - 0.01;
+                else
+                    flag = flag + 1;
                 end
             end
 
@@ -23,6 +27,10 @@ function [] = move_to_theta(theta_a, theta_b)
             %Checking equality using threshold to avoid
             %Matlab equality errors
             if sum(abs(theta_a - theta_b))<0.001
+                done = true;
+            end
+            
+            if flag==5
                 done = true;
             end
 

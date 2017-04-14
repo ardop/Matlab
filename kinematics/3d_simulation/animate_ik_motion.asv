@@ -15,7 +15,7 @@ pzb = 25;
 
 while(true)
     
-    in = input('Enter the first and second end-effector coordinate values.\n1: Linear joint control.\nEnter q to quit.\n', 's');
+    in = input('Enter the coordinate values.\n1: Linear joint control.\nEnter q to quit.\n', 's');
     if in=='q'
         break
         
@@ -23,65 +23,26 @@ while(true)
         in = strsplit(in);
         target = str2double(in);
         target1 = target(1:3);
-        target2 = target(4:6);
-        mode = target(7);
+        mode = target(4);
         
-        disp(mode);
-        
-        % First we move to target 1
-        
-        theta_a = move_to_target(target1, theta_a);
-        theta_a = round(theta_a, 2);
+        theta_b = ik_pseudo_inverse(target1');
+        theta_b = theta_b'; %Make it a row vector
         
         % Motion according to the modes
         if(mode==1)
             
-            %Linear motion of joint angles.
-            %First the joint angles for the second coordinate is calculated
+            %Linear uniform motion of joint angles.
+            %First the joint angles for the second coordinate is calculated  
+            move_to_theta_uniform(theta_a, theta_b);
             
-            theta_b = ik_pseudo_inverse(target2');
-            theta_b = round(theta_b, 2);
+  
+        elseif(mode==2)
             
-            theta_c = theta_a;
-            
-            delta = 0.1; %Linear change
-            
-            while true
-                
-                flag = 0;
-                
-                for i=1:5
-                    
-                    if(theta_a(i)<theta_b(i))
-                        
-                        theta_c(i) = theta_a(i) + delta;
-                        
-                    elseif (theta_a(i)<theta_b(i))
-                            
-                            theta_c(i) = theta_a(i) - delta;
-                    else
-                        % Equal
-                        flag = flag + 1; %Count the number of angles that are equal
-                        
-                    end
-                end
-                
-                if(flag==5)
-                    break
-                else
-                    
-                          
-                            
-                    
-                    
-            
-
-            
-            
-            
-            
-            
-            
+            n0 = 2;
+            nf = 10;
+            dq0 = 0;
+            dqf = 0;
+            move_to_theta_cubic(theta_a, theta_b);
             
         end
         
