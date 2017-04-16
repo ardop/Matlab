@@ -21,6 +21,17 @@ function [] = move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, dqc)
     %Equation parameters
     x1 = A1\B1; %inv(A1)*B1
     
+    disp('B1:');
+    disp(B1);
+    
+    disp('x1:');
+    disp(x1);
+    
+    disp('----------------');
+    disp('A1*x1:');
+    disp(A1*x1);
+    disp('----------------');
+    
     %Now we calculate parameters for the linear equation
     %The equation is of the form q(n) = dqc*n + c1
     %Where c1 can be computed from boundary conditions
@@ -46,6 +57,17 @@ function [] = move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, dqc)
     
     %Compute parameters
     x3 = A3\B3;
+    
+    disp('B3:');
+    disp(B3);
+    
+    disp('x3:');
+    disp(x3);
+    
+    disp('----------------');
+    disp('A3*x3:');
+    disp(A3*x3);
+    disp('----------------');
     
     %The arm is moved in 3 phases
     

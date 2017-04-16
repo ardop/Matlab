@@ -67,7 +67,7 @@ while(true)
                 nf = 100;
                 n1 = 5;
                 n2 = 95;
-                dqc = 0.001;
+                dqc = 0.01;
                 
                 move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, dqc);
                 
