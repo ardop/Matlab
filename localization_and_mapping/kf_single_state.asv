@@ -1,3 +1,6 @@
+clear all;
+clc;
+
 %Kalman filter for a single state variable (sensor value)
 %(Used for stereo camera depth estimation)
 
@@ -8,18 +11,47 @@ A = 1; %As the values are not dependent on time or other external factors.
 B = 0; %The predicted value is the same as the measured value
 u = 0; %No external control signal
 
-Q = 0; %Noise covariance matrix
-P_prev = 25; %State covariance matrix
+Q = 1e-3; %Noise covariance matrix
+P_prev = 10; %State covariance matrix
+R = 100; %Measurement noise covariance matrix
 
 x_next = 0; %Next iteration state variable
 P_next = 0;
 H = 1; 
+I = 1; %identity
+
+z = 30; %Measured state. Continuous get and update every iteration
+        %In this case, it i
 
 while(true)
     
     x_next = A*x_prev + B*u;
     P_next = A*P_prev*(A') + Q;
     
-    %Compute Kalman Ga
+    %Compute Kalman Gain
+    K = (P_next*(H'))/(H*P_next*(H') + R);
+    
+    
+    %Computing new state
+    x_prev = x_next + K*(z - H*x_next);
+    
+    disp(x_prev);
+    
+    %Update covariance
+    P_prev = (I - K*H)*P_next;
+    
+end
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
