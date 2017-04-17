@@ -42,6 +42,7 @@ function varargout = motion_ui(varargin)
         gui_mainfcn(gui_State, varargin{:});
     end
     % End initialization code - DO NOT EDIT
+
     
 
 end
@@ -61,6 +62,10 @@ function motion_ui_OpeningFcn(hObject, eventdata, handles, varargin)
 
     % UIWAIT makes motion_ui wait for user response (see UIRESUME)
     % uiwait(handles.figure1);
+    
+    set(handles.figure1,'Position', [140   20  70.0000   23.1538]);
+
+    
 
 end
 
@@ -216,6 +221,7 @@ end
 % --- Executes on button press in move_button.
 function move_button_Callback(hObject, eventdata, handles)
 
+
     x_target = get(handles.x_target_text, 'String');
     y_target = get(handles.y_target_text, 'String');
     z_target = get(handles.z_target_text, 'String');
@@ -285,7 +291,7 @@ function move_button_Callback(hObject, eventdata, handles)
         
         %Update theta_a
         theta_a = theta_b;
-        save('theta_a');
+        save('theta_a.mat', 'theta_a');
         
     end
         

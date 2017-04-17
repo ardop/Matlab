@@ -13,6 +13,8 @@ function [] = initialize_axes()
     ax.ZLim = [0 100];
     grid on;
     rotate3d on;
+    %Setting up default view with azimuth and elevation
+    view(-50, 25);
 %     zoom on;
     
 end
