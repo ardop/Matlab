@@ -1,5 +1,7 @@
 function [] = fk_coord_plot(theta)
 
+    figure(1); %Draw on the same figure
+
     l0 = 14.2;
     l1 = 1.8;
     l2 = 14.5;
@@ -86,6 +88,8 @@ function [] = fk_coord_plot(theta)
     hold on;
     %Clear axis for next fram
     cla;
+    
+    
     
     plot3(x0, y0, z0, 'LineWidth', 2, 'Color', 'b');
     plot3(x1, y1, z1, 'LineWidth', 2, 'Color', 'b');

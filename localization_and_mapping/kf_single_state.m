@@ -33,7 +33,7 @@ while(true)
     
     %Input with noise
     
-    z = true_value + noise_sd*randn;
+    z = random('norm', true_value, noise_sd);
     
     
     %Computing new state

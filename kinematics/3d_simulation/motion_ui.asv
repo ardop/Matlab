@@ -42,7 +42,6 @@ function varargout = motion_ui(varargin)
         gui_mainfcn(gui_State, varargin{:});
     end
     % End initialization code - DO NOT EDIT
-    
 
 end
 % --- Executes just before motion_ui is made visible.
@@ -220,11 +219,10 @@ function move_button_Callback(hObject, eventdata, handles)
     y_target = get(handles.y_target_text, 'String');
     z_target = get(handles.z_target_text, 'String');
     
-    disp(x_target);
+    d
     
-    if(~isempty(x_target) && ~isempty(y_target) && ~isempty(z_target))
+    if(x_target~='' && y_target~='' && z_target~='')
         
-        %Only procedd if there is input in the cells
         x_target = str2double(x_target);
         y_target = str2double(y_target);
         z_target = str2double(z_target);
@@ -233,10 +231,8 @@ function move_button_Callback(hObject, eventdata, handles)
         disp(target);
         theta_b = ik_pseudo_inverse(target);
         theta_b = theta_b';
-        
-        load('theta_a.mat', 'theta_a');
-        disp(theta_a);
 
+        theta_a = load('theta_a'); %Loading theta_a
 
         joint_type = get(handles.joint_type_choose, 'Value');
         target_type = get(handles.target_type_choose, 'Value');
@@ -246,35 +242,7 @@ function move_button_Callback(hObject, eventdata, handles)
 
         if(is_joint)
 
-           	if(joint_type == 1)
-                %Linear
-                move_to_theta_uniform(theta_a, theta_b);
-                
-            elseif(joint_type == 2)
-                
-                %Cubic
-                n0 = 0;
-                nf = 100;
-                %Initial and final velocities
-                % Not absolute velocities. Iteration velocities
-                dq0 = 0; 
-                dqf = 0;
-
-                move_to_theta_cubic(theta_a, theta_b, n0, nf, dq0, dqf);
-                
-            elseif(joint_type == 3)
-                
-                %Rest to rest with constant velocity
-                n0 = 0;
-                nf = 100;
-                n1 = 5;
-                n2 = 95;
-                dqc = 0.01;
-                
-                move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, dqc);
-                
-            end
-                
+            disp(joint_type);
         end
 
         if(is_target)
@@ -282,10 +250,6 @@ function move_button_Callback(hObject, eventdata, handles)
             disp(target_type);
 
         end
-        
-        %Update theta_a
-        theta_a = theta_b;
-        save('theta_a');
         
     end
         

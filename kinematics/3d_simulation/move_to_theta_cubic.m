@@ -34,7 +34,7 @@ function [] = move_to_theta_cubic(theta_a, theta_b, n0, nf, dq0, dqf)
         theta_c = a*x;
         theta_c = [theta_c 0];
         fk_coord_plot(theta_c);
-        pause(0.001);
+        pause(0.01);
     end
 
 
