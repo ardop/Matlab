@@ -42,6 +42,8 @@ function [] = move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, dqc)
     %Calculating the velocity that makes such a motion possible
     %If an arbitrary velocity is given, the linear motion(constant velocity
     %motion) might go in an undesirable direction
+    %Velocity for each joint is computed such that the net desired
+    %Motion is obtained
     dqc = (tmp_q1-tmp_q2)/(n1-n2);
     
     disp('velocity');
