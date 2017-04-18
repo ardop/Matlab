@@ -22,6 +22,7 @@ function [] = move_to_theta_cubic(theta_a, theta_b, n0, nf, dq0, dqf)
     disp('----------------');
     disp('A*x:');
     disp(A*x);
+    disp('----------------');
     
     %Now that we have each of the cubic equations, the arm is moved
     

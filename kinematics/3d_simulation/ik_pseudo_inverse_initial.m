@@ -30,7 +30,7 @@ function [theta_ret] = ik_pseudo_inverse_initial(target, theta_initial)
     
     while(true)
         
-        theta_default = theta_initial;
+        theta_default = theta_initial(1:4); %Only four values are required as the Jacobian is computed for 4 joint variables
 
         theta_calc = calc_pseudo_inverse(theta_default, target);
         theta_calc = [theta_calc; 0];

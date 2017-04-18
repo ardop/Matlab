@@ -43,11 +43,11 @@ for i=1:500
 
 end
 
-disp('target:');
-disp(t);
-disp('calculated:');
-disp(ti);
-fprintf('-------------------------\n\n');
+% disp('target:');
+% disp(t);
+% disp('calculated:');
+% disp(ti);
+% fprintf('-------------------------\n\n');
     
 
 end
