@@ -16,7 +16,7 @@ function [] = move_to_theta_cubic(theta_a, theta_b, n0, nf, dq0, dqf)
     disp(B);
     
     disp('x:');
-    x = A\B; %(inv(A)*b)
+    x = A\B; %(inv(A)*B)
     
     disp(x);
     disp('----------------');

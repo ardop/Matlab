@@ -273,8 +273,8 @@ function move_button_Callback(hObject, eventdata, handles)
                 %Rest to rest with constant velocity
                 n0 = 0;
                 nf = 100;
-                n1 = 5;
-                n2 = 95;
+                n1 = 10;
+                n2 = 90;
                 dqc = 0.01;
                 
                 move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, dqc);

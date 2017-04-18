@@ -3,6 +3,7 @@ clear all;
 
 figure('Name', 'Simulation');
 set(1, 'DefaultFigurePosition', [104   161   560   420])
+
 initial_theta = [0 pi/2 pi/2 0 0];
 theta_a = initial_theta;
 fk_coord_plot(initial_theta);
