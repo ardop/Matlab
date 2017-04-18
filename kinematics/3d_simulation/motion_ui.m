@@ -226,8 +226,6 @@ function move_button_Callback(hObject, eventdata, handles)
     y_target = get(handles.y_target_text, 'String');
     z_target = get(handles.z_target_text, 'String');
     
-    disp(x_target);
-    
     if(~isempty(x_target) && ~isempty(y_target) && ~isempty(z_target))
         
         %Only procedd if there is input in the cells
@@ -236,12 +234,14 @@ function move_button_Callback(hObject, eventdata, handles)
         z_target = str2double(z_target);
         
         target = [x_target; y_target; z_target];
-        disp(target);
-        theta_b = ik_pseudo_inverse(target);
-        theta_b = theta_b';
+        target_b = target'; 
         
+        theta_b = 0;
+        
+        %Load the inital thetas and target values (for joint and target
+        %control
         load('theta_a.mat', 'theta_a');
-        disp(theta_a);
+        load('target_a.mat', 'target_a');
 
 
         joint_type = get(handles.joint_type_choose, 'Value');
@@ -251,12 +251,24 @@ function move_button_Callback(hObject, eventdata, handles)
         is_target = get(handles.target_select, 'Value');
 
         if(is_joint)
-
-           	if(joint_type == 1)
-                %Linear
+            
+            theta_b = ik_pseudo_inverse(target);
+            theta_b = theta_b';
+            
+            %For each condition, check if a solution is possible
+           	if(joint_type == 1 & theta_b~=-1)
+                %Uniform
                 move_to_theta_uniform(theta_a, theta_b);
                 
-            elseif(joint_type == 2)
+            elseif(joint_type == 2 & theta_b~=-1)
+                %Linear
+                
+                n0 = 0;
+                nf = 100;
+                move_to_theta_linear(theta_a, theta_b, n0, nf);
+                
+                
+            elseif(joint_type == 3 & theta_b~=-1)
                 
                 %Cubic
                 n0 = 0;
@@ -268,7 +280,7 @@ function move_button_Callback(hObject, eventdata, handles)
 
                 move_to_theta_cubic(theta_a, theta_b, n0, nf, dq0, dqf);
                 
-            elseif(joint_type == 3)
+            elseif(joint_type == 4 & theta_b~=-1)
                 
                 %Rest to rest with constant velocity
                 n0 = 0;
@@ -285,13 +297,26 @@ function move_button_Callback(hObject, eventdata, handles)
 
         if(is_target)
 
-            disp(target_type);
+            if(target_type==1)
+                
+                n0 = 0;
+                nf = 100;
+                
+                move_to_target_linear(target_a, target_b, n0, nf);
+                
+            end
 
         end
         
+        
         %Update theta_a
         theta_a = theta_b;
+        target_a = target_b;
+        
+        %saving theta_a and target_a
         save('theta_a.mat', 'theta_a');
+        save('target_a.mat', 'target_a');
+        
         
     end
         

@@ -2,18 +2,8 @@ function [] = move_to_theta_uniform(theta_a, theta_b)
     
     done = false;
     
-    %We calculate the the difference between initial and final positions
-    %(theta). We then find the max such difference among the 5 differences
-    %and make sure that all the angles update uniformly and converge at the
-    %same iteration
-    
-    theta_diff = abs(theta_b - theta_a);
-    max_diff = max(theta_diff);
-    min_diff = min(theta_diff);
-    min_iter = min_diff/0.01;
-    
-    
-    
+    %The angles are updated uniformly
+       
     while ~done
             theta_check = theta_a - theta_b;
             %Rounding off to avoid errors

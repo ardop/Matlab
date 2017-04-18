@@ -52,7 +52,7 @@ function [theta_ret] = ik_pseudo_inverse(target)
         else
             iter = iter + 1;
             if iter>100
-                fprintf('No Solution Possible');
+                fprintf('No Solution Possible\n');
                 theta_ret = -1;
                 break;
             end

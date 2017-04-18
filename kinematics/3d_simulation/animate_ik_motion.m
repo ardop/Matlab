@@ -5,7 +5,11 @@ figure('Name', 'Simulation');
 set(1, 'DefaultFigurePosition', [104   161   560   420])
 
 initial_theta = [0 pi/2 pi/2 0 0];
+initial_target = [-44 1.8 14.2];
+
 theta_a = initial_theta;
+target_a = initial_target;
+
 fk_coord_plot(initial_theta);
 initialize_axes();
 
@@ -13,6 +17,7 @@ initialize_axes();
 
 %Saving theta_a (for gui)
 save('theta_a.mat', 'theta_a');
+save('target_a.mat', 'target_a');
 
 motion_ui;
 
