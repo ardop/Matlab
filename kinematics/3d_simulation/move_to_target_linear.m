@@ -1,14 +1,15 @@
-function [] = move_to_target_linear(target_a, target_b, n0, nf, is_plot_trajectory)
+function [theta_b] = move_to_target_linear(theta_a, target_a, target_b, n0, nf, is_plot_trajectory)
     
-    %First check if both the solutions are valid
-    t_a = ik_pseudo_inverse(target_a');
+%     t_a = ik_pseudo_inverse(target_a');
+    t_a = theta_a';
     t_b = ik_pseudo_inverse(target_b');
     
+    theta_b = 0;
     
     % In this case, we assume that if the end points are valid then 
     % all linear points between them can be reached
     
-    if(t_a~=-1 & t_b~=-1)
+    if(t_b~=-1)
         
         %Creating a linear equation with two unknowns to satisfy
         %the two end point position constraints for x, y and z
@@ -31,12 +32,20 @@ function [] = move_to_target_linear(target_a, target_b, n0, nf, is_plot_trajecto
         %Plot initial target position
         fk_coord_plot(t_a);
         
+        disp(theta_a);
+        disp(target_a);
+        disp(target_b);
+        
         for i=n0:nf
             
             a = [i 1];
             target_c = a*x;
             
+            
             t_c = ik_pseudo_inverse_initial(target_c', t_a');
+%             disp('------------------------');
+%             disp(t_c);
+            theta_b = t_c;
             
             fk_coord_plot(t_c);
             

@@ -304,7 +304,7 @@ function move_button_Callback(hObject, eventdata, handles)
                 n0 = 0;
                 nf = 100;
                 
-                move_to_target_linear(target_a, target_b, n0, nf, is_plot_trajectory);
+                theta_b = move_to_target_linear(theta_a, target_a, target_b, n0, nf, is_plot_trajectory);
                 
             end
 
