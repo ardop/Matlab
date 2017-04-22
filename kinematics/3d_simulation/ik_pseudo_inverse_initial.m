@@ -35,6 +35,7 @@ function [theta_ret] = ik_pseudo_inverse_initial(target, theta_initial)
 %         theta_default = theta_initial(1:4); %Only four values are required as the Jacobian is computed for 4 joint variables
 
         theta_default = [random('norm', theta_initial(1), std), random('norm', theta_initial(2), std), random('norm', theta_initial(3), std), random('norm', theta_initial(4), std)]; 
+
         
         std = 0.5; 
         
@@ -42,7 +43,6 @@ function [theta_ret] = ik_pseudo_inverse_initial(target, theta_initial)
         theta_calc = [theta_calc; 0];
 
         error = calc_error(target, get_coord(fkval(theta_calc)));
-        
         if(validate_theta(theta_calc) && (error<=error_threshold))
             
             fprintf('Valid Angles!!!\n\n');

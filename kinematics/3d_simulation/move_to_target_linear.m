@@ -29,59 +29,50 @@ function [theta_b] = move_to_target_linear(theta_a, target_a, target_b, n0, nf, 
         disp(A*x);
         disp('----------------');
         
-        %Plot initial target position
-        fk_coord_plot(t_a);
+        disp('COMPUTING TRAJECTORY:');
+        fprintf('\n');
+        
+        trajectory_configurations = [];
         
         for i=n0:nf
             
             a = [i 1];
             target_c = a*x;
-            
-            
+             
             t_c = ik_pseudo_inverse_initial(target_c', t_a');
-            disp('------------------------');
-            
-            disp(calc_error(t_a, t_c));
-            
-            if(calc_error(t_a, t_c)<0.05)
-            
-            
-    %             disp(t_c);
-                theta_b = t_c;
+            trajectory_configurations = [trajectory_configurations; t_c'];
+            fprintf('Iteration: %d\n', i);
+            theta_b = t_c';
 
-                fk_coord_plot(t_c);
-
-                pause(0.001);
-
-                t_a = t_c;
-                
+            t_a = t_c;
+    
         end
+        
+        %Plotting the stored trajectory
+        fprintf('PLOTTING TRAJECTORY:\n');
+        
+        for i=1:length(trajectory_configurations);
+            
+            fk_coord_plot(trajectory_configurations(i, :));
+            pause(0.001);
+            
+        end
+       
         
         %Plot trajectory
         if(is_plot_trajectory)
                 
-            for i=n0:nf
+            for i=1:length(trajectory_configurations)
 
-                a = [i 1];
-                target_c = a*x;
-                
+                target_c = get_coord(fkval(trajectory_configurations(i, :)));
                 [xc, yc, zc] = map_coord(target_c);
-                hold on;
                 plot3(xc, yc, zc, '.', 'Color', 'c', 'MarkerSize', 7);
+                hold on;
+                
             end
-
 
         end
         
-   
-        
-    end
-    
-    
-    
-    
-    
-    
-    
+    end    
     
 end

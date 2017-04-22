@@ -40,20 +40,28 @@ function [theta_b] = move_to_target_linear(theta_a, target_a, target_b, n0, nf, 
             
             t_c = ik_pseudo_inverse_initial(target_c', t_a');
             disp('------------------------');
-            angle_proximity = calc_erro(t_a, t_c);
+            angle_proximity = calc_error(t_a, t_c);
             disp(angle_proximity);
             
-            if(angle_p
+            while(angle_proximity>=0.1)
+                
+                
+            
+            if(angle_proximity<0.1)
             
             
-%             disp(t_c);
-            theta_b = t_c;
-            
-            fk_coord_plot(t_c);
-            
-            pause(0.001);
-            
-            t_a = t_c;
+    %             disp(t_c);
+                theta_b = t_c;
+
+                fk_coord_plot(t_c);
+
+                pause(0.001);
+
+                t_a = t_c;
+                
+            end
+                
+                
         end
         
         %Plot trajectory

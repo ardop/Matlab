@@ -24,7 +24,7 @@ function [theta_ret] = ik_pseudo_inverse(target)
     t5br = 1.5707;
     t5ar = -1.5707;
 
-    error_threshold = 1.5;
+    error_threshold = 1.0;
     
     iter = 1;
     
@@ -43,7 +43,7 @@ function [theta_ret] = ik_pseudo_inverse(target)
 
         error = calc_error(target, get_coord(fkval(theta_calc)));
         
-        if(validate_theta(theta_calc) && (error<=error_threshold))
+        if(validate_theta(theta_calc) & (error<=error_threshold))
             
             fprintf('Valid Angles!!!\n\n');
             fprintf('Error: %f\n\n----------------------\n\n', error);
