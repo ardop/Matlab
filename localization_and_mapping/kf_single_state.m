@@ -6,7 +6,7 @@ clc;
 
 %Initializting initial variables
 
-x_prev = 0; %Initial measured state. Set to any value
+x_prev = 100; %Initial measured state. Set to any value
 A = 1; %As the values are not dependent on time or other external factors.
 B = 0; %The predicted value is the same as the measured value
 u = 0; %No external control signal
@@ -20,7 +20,7 @@ P_next = 0;
 H = 1; 
 I = 1; %identity
 
-true_value = 30; %True value of the measured quantity      
+true_value = 40; %True value of the measured quantity      
 noise_sd = 1; %Standard deviation for noise added to the true value for testing purposes
 
 while(true)
@@ -34,6 +34,8 @@ while(true)
     %Input with noise
     
     z = random('norm', true_value, noise_sd);
+    
+%     z = input('Enter measurement: ');
     
     
     %Computing new state
