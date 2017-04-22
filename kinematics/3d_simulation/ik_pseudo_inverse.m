@@ -24,7 +24,7 @@ function [theta_ret] = ik_pseudo_inverse(target)
     t5br = 1.5707;
     t5ar = -1.5707;
 
-    error_threshold = 1.0;
+    error_threshold = 1.5;
     
     iter = 1;
     

@@ -312,15 +312,7 @@ function move_button_Callback(hObject, eventdata, handles)
                 n0 = 0;
                 nf = 100;
                 
-                %Initial and final target velocities
-                dt0 = 0;
-                dtf = 0;
-                
-                %Initial and final target accelerations
-                ddt0 = 0;
-                ddtf = 0;
-                
-                theta_b = move_to_target_linear_quintic(theta_a, target_a, target_b, n0, nf, dt0, dtf, ddt0, ddtf, is_plot_trajectory);
+                theta_b = move_to_target_linear_
                 
             end
 
