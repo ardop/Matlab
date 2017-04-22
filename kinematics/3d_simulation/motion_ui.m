@@ -22,7 +22,7 @@ function varargout = motion_ui(varargin)
 
     % Edit the above text to modify the response to help motion_ui
 
-    % Last Modified by GUIDE v2.5 17-Apr-2017 13:28:41
+    % Last Modified by GUIDE v2.5 20-Apr-2017 01:06:06
 
     % Begin initialization code - DO NOT EDIT
     gui_Singleton = 1;
@@ -226,7 +226,8 @@ function move_button_Callback(hObject, eventdata, handles)
     y_target = get(handles.y_target_text, 'String');
     z_target = get(handles.z_target_text, 'String');
     
-    if(~isempty(x_target) && ~isempty(y_target) && ~isempty(z_target))
+    
+    if(~isempty(x_target) & ~isempty(y_target) & ~isempty(z_target))
         
         %Only procedd if there is input in the cells
         x_target = str2double(x_target);
@@ -249,6 +250,7 @@ function move_button_Callback(hObject, eventdata, handles)
 
         is_joint = get(handles.joint_select, 'Value');
         is_target = get(handles.target_select, 'Value');
+        is_plot_trajectory = get(handles.plot_trajectory_select, 'Value');
 
         if(is_joint)
             
@@ -302,7 +304,7 @@ function move_button_Callback(hObject, eventdata, handles)
                 n0 = 0;
                 nf = 100;
                 
-                move_to_target_linear(target_a, target_b, n0, nf);
+                theta_b = move_to_target_linear(theta_a, target_a, target_b, n0, nf, is_plot_trajectory);
                 
             end
 
@@ -351,4 +353,14 @@ function target_select_Callback(hObject, eventdata, handles)
     %deselect the other radio button
     set(handles.joint_select, 'Value', 0);
 
+end
+
+
+% --- Executes on button press in plot_trajectory_select.
+function plot_trajectory_select_Callback(hObject, eventdata, handles)
+% hObject    handle to plot_trajectory_select (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of plot_trajectory_select
 end
