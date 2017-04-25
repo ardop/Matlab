@@ -22,7 +22,7 @@ function varargout = motion_ui(varargin)
 
     % Edit the above text to modify the response to help motion_ui
 
-    % Last Modified by GUIDE v2.5 20-Apr-2017 01:06:06
+    % Last Modified by GUIDE v2.5 25-Apr-2017 12:25:46
 
     % Begin initialization code - DO NOT EDIT
     gui_Singleton = 1;
@@ -251,6 +251,7 @@ function move_button_Callback(hObject, eventdata, handles)
         is_joint = get(handles.joint_select, 'Value');
         is_target = get(handles.target_select, 'Value');
         is_plot_trajectory = get(handles.plot_trajectory_select, 'Value');
+        is_plot_graph = get(handles.plot_graph_select, 'Value');
 
         if(is_joint)
             
@@ -267,7 +268,7 @@ function move_button_Callback(hObject, eventdata, handles)
                 
                 n0 = 0;
                 nf = 100;
-                move_to_theta_linear(theta_a, theta_b, n0, nf);
+                move_to_theta_linear(theta_a, theta_b, n0, nf, is_plot_graph);
                 
                 
             elseif(joint_type == 3 & theta_b~=-1)
@@ -280,7 +281,7 @@ function move_button_Callback(hObject, eventdata, handles)
                 dq0 = 0; 
                 dqf = 0;
 
-                move_to_theta_cubic(theta_a, theta_b, n0, nf, dq0, dqf);
+                move_to_theta_cubic(theta_a, theta_b, n0, nf, dq0, dqf, is_plot_graph);
                 
             elseif(joint_type == 4 & theta_b~=-1)
                 
@@ -291,7 +292,7 @@ function move_button_Callback(hObject, eventdata, handles)
                 n2 = 90;
                 dqc = 0.01;
                 
-                move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, dqc);
+                move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, is_plot_graph);
                 
             end
                 
@@ -304,7 +305,7 @@ function move_button_Callback(hObject, eventdata, handles)
                 n0 = 0;
                 nf = 100;
                 
-                theta_b = move_to_target_linear(theta_a, target_a, target_b, n0, nf, is_plot_trajectory);
+                theta_b = move_to_target_linear(theta_a, target_a, target_b, n0, nf, is_plot_trajectory, is_plot_graph);
                 
             elseif(target_type==2)
                 
@@ -320,7 +321,7 @@ function move_button_Callback(hObject, eventdata, handles)
                 ddt0 = 0;
                 ddtf = 0;
                 
-                theta_b = move_to_target_linear_quintic(theta_a, target_a, target_b, n0, nf, dt0, dtf, ddt0, ddtf, is_plot_trajectory);
+                theta_b = move_to_target_linear_quintic(theta_a, target_a, target_b, n0, nf, dt0, dtf, ddt0, ddtf, is_plot_trajectory, is_plot_graph);
                 
             end
 
@@ -379,4 +380,14 @@ function plot_trajectory_select_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of plot_trajectory_select
+end
+
+
+% --- Executes on button press in plot_graph_select.
+function plot_graph_select_Callback(hObject, eventdata, handles)
+% hObject    handle to plot_graph_select (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of plot_graph_select
 end

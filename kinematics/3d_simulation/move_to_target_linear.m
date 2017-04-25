@@ -1,4 +1,4 @@
-function [theta_b] = move_to_target_linear(theta_a, target_a, target_b, n0, nf, is_plot_trajectory)
+function [theta_b] = move_to_target_linear(theta_a, target_a, target_b, n0, nf, is_plot_trajectory, is_plot_graph)
     
 %     t_a = ik_pseudo_inverse(target_a');
     t_a = theta_a';
@@ -73,6 +73,44 @@ function [theta_b] = move_to_target_linear(theta_a, target_a, target_b, n0, nf, 
             end
 
         end
+        
+        
+        %Plotting the graphs if selected in the UI
+    if(is_plot_graph)
+        
+        
+        time_axis = n0:nf;
+        target_axis = [];
+        
+        for i=n0:nf
+            
+            a = [i 1]; %For angle
+            theta_c = a*x;
+            target_axis = [target_axis; theta_c];
+        end
+        
+        %Plotting angles
+        
+        figure('Name', 'Angle Plot');
+        title('Target Plot');
+        xlabel('Iteration');
+        ylabel('Target (cm)');
+        hold on;
+        
+        
+        %Plotting target plot for x, y and z
+        plot(time_axis, target_axis(:, 1));
+        plot(time_axis, target_axis(:, 2));
+        plot(time_axis, target_axis(:, 3));
+
+        
+        legend('X coordinate', 'Y coordinate', 'Z coordinate');
+        
+        hold off;
+        
+       
+        
+    end
         
     end    
     

@@ -1,4 +1,4 @@
-function [theta_b] = move_to_target_linear_quintic(theta_a, target_a, target_b, n0, nf, dt0, dtf, ddt0, ddtf, is_plot_trajectory)
+function [theta_b] = move_to_target_linear_quintic(theta_a, target_a, target_b, n0, nf, dt0, dtf, ddt0, ddtf, is_plot_trajectory, is_plot_graph)
     
 
 %     t_a = ik_pseudo_inverse(target_a');
@@ -55,53 +55,129 @@ function [theta_b] = move_to_target_linear_quintic(theta_a, target_a, target_b, 
         for i=n0:nf
             
             a = [i^5 i^4 i^3 i^2 i 1];
-            xcc = a*x;
-            ycc = target_a(2) + my*(xcc - target_a(1));
-            zcc = target_a(3) + mz*(xcc - target_a(1));
             
-            target_c = [xcc ycc zcc];
+            xc = a*x;
+            yc = target_a(2) + my*(xc - target_a(1));
+            zc = target_a(3) + mz*(xc - target_a(1));
             
-            [xc, yc, zc] = map_coord(target_c);
-            fprintf('%2.2f %2.2f %2.2f\n', xcc, ycc, zcc);
+            target_c = [xc yc zc];
             
-            figure(1);
-            plot3(xc, yc, zc, '.', 'Color', 'c', 'MarkerSize', 70);
-            pause (0.001);
-%                 
+            [xc, yc, zc] = map_coord(target_c);              
              
-%             t_c = ik_pseudo_inverse_initial(target_c', t_a');
-%             trajectory_configurations = [trajectory_configurations; t_c'];
+            t_c = ik_pseudo_inverse_initial(target_c', t_a');
+            trajectory_configurations = [trajectory_configurations; t_c'];
             fprintf('Iteration: %d\n', i);
-%             theta_b = t_c';
+            theta_b = t_c';
             
-%             t_a = t_c;
+            t_a = t_c;
     
         end
         
         %Plotting the stored trajectory
-        fprintf('PLOTTING TRAJECTORY:\n');
+        fprintf('PLOTTING JOINT TRAJECTORY:\n');
         
-%         for i=1:length(trajectory_configurations);
-%             
-%             fk_coord_plot(trajectory_configurations(i, :));
-%             pause(0.001);
-%             
-%         end
+        for i=1:length(trajectory_configurations);
+            
+            fk_coord_plot(trajectory_configurations(i, :));
+            pause(0.001);
+            
+        end
        
         
         %Plot trajectory
-%         if(is_plot_trajectory)
-%                 
-%             for i=1:length(trajectory_configurations)
-% 
-%                 target_c = get_coord(fkval(trajectory_configurations(i, :)));
-%                 [xc, yc, zc] = map_coord(target_c);
-%                 plot3(xc, yc, zc, '.', 'Color', 'c', 'MarkerSize', 7);
-%                 
-%                 
-%             end
-% 
-%         end
+        fprintf('PLOTTING END EFFECTOR TRAJECTORY:\n');
+        if(is_plot_trajectory)
+                
+            for i=1:length(trajectory_configurations)
+
+                target_c = get_coord(fkval(trajectory_configurations(i, :)));
+                [xc, yc, zc] = map_coord(target_c);
+                plot3(xc, yc, zc, '.', 'Color', 'c', 'MarkerSize', 7);
+                
+                
+            end
+
+        end
+        
+         %Plotting the graphs if selected in the UI
+    if(is_plot_graph)
+        
+        
+        time_axis = n0:nf;
+        target_axis = [];
+        velocity_axis = [];
+        acceleration_axis = [];
+        
+        for i=n0:nf
+            
+            a = [i^5 i^4 i^3 i^2 i 1]; %For angle
+            b = [5*(i^4) 4*(i^3) 3*(i^2) 2*i 1 0]; %For velocity
+            c = [20*(i^3) 12*(i^2) 6*i 2 0 0]; %For acceleration
+            target_c = a*x;
+            target_axis = [target_axis; target_c];
+            target_c = b*x;
+            velocity_axis = [velocity_axis; target_c];
+            target_c = c*x;
+            accleration_axis = [acceleration_axis; target_c];
+        end
+        
+        %Plotting angles
+        
+        figure('Name', 'Target Plot');
+        title('Target Plot');
+        xlabel('Iteration');
+        ylabel('Target (cm)');
+        hold on;
+        
+        
+        %Plotting angle plot for all the joints
+        plot(time_axis, target_axis(:, 1));
+        plot(time_axis, target_axis(:, 2));
+        plot(time_axis, target_axis(:, 3));
+        
+        legend('X coordinate', 'Y coordinate', 'Z coordinate');
+        
+        hold off;
+        
+        %Plotting velocities
+        
+        figure('Name', 'Target Velocity Plot');
+        title('Target Velocity Plot');
+        xlabel('Iteration');
+        ylabel('Target Velocity (cm/iter)');
+        hold on;
+        
+        
+        %Plotting velocity plot for all the joints
+        plot(time_axis, velocity_axis(:, 1));
+        plot(time_axis, velocity_axis(:, 2));
+        plot(time_axis, velocity_axis(:, 3));
+        
+        legend('X velocity', 'Y velocity', 'Z velocity');
+        
+        hold off;
+        
+        %Plotting accelerations
+        
+        
+        figure('Name', 'Target Acceleration Plot');
+        title('Target Acceleration Plot');
+        xlabel('Iteration');
+        ylabel('Target Acceleration (cm/iter^2)');
+        hold on;
+        
+        
+        %Plotting velocity plot for all the joints
+        plot(time_axis, acceleration_axis(:, 1));
+        plot(time_axis, acceleration_axis(:, 2));
+        plot(time_axis, acceleration_axis(:, 3));
+        
+        legend('X acceleration', 'Y acceleration', 'Z acceleration');
+        
+        hold off;
+        
+    
+    end
         
     end    
     

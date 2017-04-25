@@ -1,4 +1,4 @@
-function [] = move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, dqc)
+function [] = move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, is_plot_graph)
     
     %We have 3 separate equations
     %The first equation is for the motion from rest to the constant 
@@ -138,6 +138,85 @@ function [] = move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, dqc)
         theta_c = [theta_c 0];
         fk_coord_plot(theta_c);
         pause(0.001);
+    end
+    
+    
+     %Plotting the graphs if selected in the UI
+    if(is_plot_graph)
+        
+        
+        time_axis = n0:nf;
+        angle_axis = [];
+        velocity_axis = [];
+        
+        for i=n0:n1
+            
+            a = [i^3 i^2 i 1]; %For angle
+            b = [3*(i^2) 2*i 1 0]; %For velocity
+            theta_c = a*x1;
+            angle_axis = [angle_axis; theta_c];
+            theta_c = b*x1;
+            velocity_axis = [velocity_axis; theta_c];
+        end
+        
+        for i=n1+1:n2
+            
+            a = [i 1]; %For angle
+            b = [1 0]; %For velocity
+            theta_c = a*x2;
+            angle_axis = [angle_axis; theta_c];
+            theta_c = b*x2;
+            velocity_axis = [velocity_axis; theta_c];
+        end
+        
+        for i=n2+1:nf
+            
+            a = [i^3 i^2 i 1]; %For angle
+            b = [3*(i^2) 2*i 1 0]; %For velocity
+            theta_c = a*x3;
+            angle_axis = [angle_axis; theta_c];
+            theta_c = b*x3;
+            velocity_axis = [velocity_axis; theta_c];
+        end
+        
+        %Plotting angles
+        
+        figure('Name', 'Angle Plot');
+        title('Angle Plot');
+        xlabel('Iteration');
+        ylabel('Angle (rad)');
+        hold on;
+        
+        
+        %Plotting angle plot for all the joints
+        plot(time_axis, angle_axis(:, 1));
+        plot(time_axis, angle_axis(:, 2));
+        plot(time_axis, angle_axis(:, 3));
+        plot(time_axis, angle_axis(:, 4));
+        
+        legend('Joint 1', 'Joint 2', 'Joint 3', 'Joint 4');
+        
+        hold off;
+        
+        %Plotting velocities
+        
+        figure('Name', 'Velocity Plot');
+        title('Velocity Plot');
+        xlabel('Iteration');
+        ylabel('Velocity (rad/iter)');
+        hold on;
+        
+        
+        %Plotting velocity plot for all the joints
+        plot(time_axis, velocity_axis(:, 1));
+        plot(time_axis, velocity_axis(:, 2));
+        plot(time_axis, velocity_axis(:, 3));
+        plot(time_axis, velocity_axis(:, 4));
+        
+        legend('Joint 1', 'Joint 2', 'Joint 3', 'Joint 4');
+        
+        hold off;
+        
     end
     
     
