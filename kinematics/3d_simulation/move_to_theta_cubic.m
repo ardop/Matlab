@@ -12,17 +12,17 @@ function [] = move_to_theta_cubic(theta_a, theta_b, n0, nf, dq0, dqf, is_plot_gr
     % joint variable matrix
     B = [theta_a(1:4); [dq0 dq0 dq0 dq0]; theta_b(1:4); [dqf dqf dqf dqf]];
     
-    disp('B:');
-    disp(B);
-    
-    disp('x:');
+%     disp('B:');
+%     disp(B);
+%     
+%     disp('x:');
     x = A\B; %(inv(A)*B)
-    
-    disp(x);
-    disp('----------------');
-    disp('A*x:');
-    disp(A*x);
-    disp('----------------');
+%     
+%     disp(x);
+%     disp('----------------');
+%     disp('A*x:');
+%     disp(A*x);
+%     disp('----------------');
     
     %Now that we have each of the cubic equations, the arm is moved
     
