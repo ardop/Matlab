@@ -8,7 +8,7 @@ function [] = move_to_theta_linear(theta_a, theta_b, n0, nf, is_plot_graph)
     A = [n0 1; nf 1];
     
     % joint variable matrix
-    B = [theta_a(1:4); theta_b(1:4)];
+    B = [theta_a; theta_b];
     
     disp('B:');
     disp(B);
@@ -31,7 +31,6 @@ function [] = move_to_theta_linear(theta_a, theta_b, n0, nf, is_plot_graph)
         
         a = [i 1];
         theta_c = a*x;
-        theta_c = [theta_c 0];
         fk_coord_plot(theta_c);
         pause(0.01);
     end

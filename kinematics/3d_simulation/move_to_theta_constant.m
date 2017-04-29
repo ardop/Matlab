@@ -18,7 +18,7 @@ function [] = move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, is_plot_g
     A0 = [n0^3 n0^2 n0 1; 3*(n0^2) 2*n0 1 0; nf^3 nf^2 nf 1; 3*(nf^2) 2*nf 1 0];
     
     % joint variable matrix
-    B0 = [theta_a(1:4); [0 0 0 0]; theta_b(1:4); [0 0 0 0]]; %Initial and final velocities are zero
+    B0 = [theta_a; [0 0 0 0 0]; theta_b; [0 0 0 0 0]]; %Initial and final velocities are zero
     
     x0 = A0\B0; %(inv(A0)*B0)
     
@@ -56,7 +56,7 @@ function [] = move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, is_plot_g
     A1 = [n0^3 n0^2 n0 1; 3*(n0^2) 2*n0 1 0; n1^3 n1^2 n1 1; 3*(n1^2) 2*n1 1 0];
     
     %Joint variable matrix
-    B1 = [theta_a(1:4); [0 0 0 0]; tmp_q1; dqc];
+    B1 = [theta_a; [0 0 0 0 0]; tmp_q1; dqc];
     
     %Equation parameters
     x1 = A1\B1; %inv(A1)*B1
@@ -92,7 +92,7 @@ function [] = move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, is_plot_g
     A3 = [nf^3 nf^2 nf 1; 3*(nf^2) 2*nf 1 0; n2^3 n2^2 n2 1; 3*(n2^2) 2*n2 1 0];
    
     
-    B3 = [theta_b(1:4); [0 0 0 0]; tmp_q2; dqc];
+    B3 = [theta_b; [0 0 0 0 0]; tmp_q2; dqc];
     
     %Compute parameters
     x3 = A3\B3;
@@ -115,7 +115,6 @@ function [] = move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, is_plot_g
         
         a = [i^3 i^2 i 1];
         theta_c = a*x1;
-        theta_c = [theta_c 0];
         fk_coord_plot(theta_c);
         pause(0.001);
     end
@@ -125,7 +124,6 @@ function [] = move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, is_plot_g
         
         a = [i 1];
         theta_c = a*x2;
-        theta_c = [theta_c 0];
         fk_coord_plot(theta_c);
         pause(0.001);
     end
@@ -135,7 +133,6 @@ function [] = move_to_theta_constant(theta_a, theta_b, n0, n1, n2, nf, is_plot_g
         
         a = [i^3 i^2 i 1];
         theta_c = a*x3;
-        theta_c = [theta_c 0];
         fk_coord_plot(theta_c);
         pause(0.001);
     end

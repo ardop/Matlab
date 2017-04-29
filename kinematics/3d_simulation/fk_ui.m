@@ -208,6 +208,8 @@ function move_button_Callback(hObject, eventdata, handles)
         load('theta_a.mat', 'theta_a');
         theta_b = [theta1, theta2, theta3, theta4, theta5];
         
+        theta_b(5) = calculate_pose_angle(theta1, theta2, theta3, theta4, theta5);
+        
         fprintf('Moving\n');
         
         %Move using any motion algorithm
@@ -220,6 +222,11 @@ function move_button_Callback(hObject, eventdata, handles)
 
 
         fprintf('Motion Complete\n');
+        
+        %Displaying the FK matrix
+        fprintf('Forward Kinematics Matrix:\n');
+        disp(fkval(theta_b));
+        fprintf('-----------------------------\n');
         
         %Updating starting value to prepare for the next set of values
         theta_a = theta_b;
